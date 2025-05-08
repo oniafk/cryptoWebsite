@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en" class="m-0 p-0 overflow-x-hidden box-border">
+  <head>
+    <meta charset="UTF-8" />
+    <link href="/src/style.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Connect Your Brand</title>
+  </head>
+  <body class="m-0 p-0 overflow-hidden box-border bg-bg-base">
+    <div class="m-0 p-0" id="app"></div>
+
+    <div
+      class="fixed inset-0 w-full h-full -z-20 bg-radial from-primary from-5% to-gray-400 to-70%"
+    ></div>
+    <div
+      class="fixed inset-0 w-full h-full -z-20 bg-radial-[at_75%_75%] from-primary from-5% to-gray-400 to-70% opacity-80"
+    ></div>
+
+    <canvas
+      id="spheres"
+      class="fixed inset-0 w-full h-full block -z-10"
+    ></canvas>
+
+    <div
+      id="contactModal"
+      class="fixed inset-0 z-50 flex items-center justify-start pointer-events-none opacity-0 transition-all duration-500 ease-in-out"
+    >
+      <div
+        class="absolute inset-0 bg-white/30 backdrop-blur-sm opacity-0 transition-opacity duration-500"
+        id="modalBackdrop"
+      ></div>
+
+      <div
+        id="modalContent"
+        class="relative bg-bg-base/40 border-2 border-white/30 w-full px-2 max-w-lg ml-[-100%] transition-all duration-500 h-[70%] [clip-path:polygon(0_0,calc(100%_-_48px)_0,100%_48px,100%_100%,0_100%)]"
+      >
+        <button
+          id="closeModalBtn"
+          class="absolute top-4 right-4 text-black hover:text-white/70 transition"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+
+        <div class="mt-4">
+          <h2 class="text-3xl font-bold text-black mb-2">Get in Touch</h2>
+          <p class="text-black/80 mb-1">
+            Ready to elevate your brand's web presence? Fill out the form below
+            and we'll be in touch within 24 hours.
+          </p>
+
+          <form class="flex flex-col space-y-1">
+            <div>
+              <input
+                type="text"
+                id="name"
+                placeholder="James Smith"
+                class="w-full p-0.5 bg-white/60 text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-white/50"
+                required
+              />
+            </div>
+
+            <div>
+              <input
+                type="tel"
+                id="phone"
+                placeholder="+1 (555) 123-4567"
+                class="w-full p-0.5 bg-white/60 text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-white/50"
+                required
+              />
+            </div>
+
+            <div>
+              <input
+                type="email"
+                id="email"
+                placeholder="example@email.com"
+                class="w-full p-0.5 bg-white/60 text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-white/50"
+                required
+              />
+            </div>
+
+            <div>
+              <textarea
+                id="message"
+                placeholder="Your inquiry here..."
+                rows="3"
+                class="w-full p-0.5 bg-white/60 text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-white/50 resize-none"
+                required
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              class="self-start bg-radial-[at_80%_80%] from-primary from-10% to-gray-400 to-100% opacity-80 text-black py-1 px-6 rounded-lg flex justify-between items-center [clip-path:polygon(0_0,calc(100%_-_16px)_0,100%_16px,100%_100%,16px_100%,0_calc(100%_-_16px))]"
+            >
+              <span class="font-bold">Send Message</span>
+              <span class="ml-2">➔</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <nav class="fixed w-full top-0 left-0 right-0 z-50">
+      <div class="w-full px-2 flex justify-between items-center py-1">
+        <div class="mr-6 font-bold text-xl text-white">CYB</div>
+        <div
+          class="hidden md:flex bg-white/8 backdrop-blur-md px-1 py-0.5 rounded-lg shadow-sm"
+        >
+          <a
+            href="#hero"
+            class="px-2.5 py-1 rounded-xl text-white hover:font-bold hover:bg-white/15 transition"
+            >Home</a
+          >
+          <a
+            href="#about"
+            class="px-2.5 py-1 rounded-xl text-white hover:font-bold hover:bg-white/15 transition"
+            >About</a
+          >
+          <a
+            href="#pricing"
+            class="px-2.5 py-1 rounded-xl text-white hover:font-bold hover:bg-white/40 transition"
+            >Pricing</a
+          >
+          <a
+            href="#contact"
+            class="px-2.5 py-1 rounded-xl text-white hover:font-bold hover:bg-white/40 transition"
+            >Contact</a
+          >
+        </div>
+        <button
+          class="bg-white text-black py-1 px-1 rounded-lg flex justify-between items-center w-12 [clip-path:polygon(0_0,calc(100%_-_16px)_0,100%_16px,100%_100%,16px_100%,0_calc(100%_-_16px))]"
+        >
+          <span class="font-bold">Request</span>
+          <span> ➔ </span>
+        </button>
+      </div>
+    </nav>
+
+    <section
+      id="hero"
+      class="h-80% w-full flex items-start justify-around py-2"
+    >
+      <div class="h-screen w-full flex justify-between items-end pb-2">
+        <div class="flex ml-8 mb-10">
+          <div class="mt-0.5 border-white border-t-1 p-1.5">
+            <h1 class="text-4xl font-bold text-white">Connect Your Brand</h1>
+          </div>
+        </div>
+        <div class="flex items-end justify-end mr-4 mb-4">
+          <div class="w-2/4">
+            <p class="text-3xl text-white">
+              Step into the next dimension of web presence with interactive 3D
+              experiences.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="h-screen w-full flex items-center">
+      <div class="w-full flex px-2 justify-between">
+        <div class="w-[10%] flex items-start justify-center pt-10">
+          <div class="transform text-white text-xl font-bold">About</div>
+        </div>
+
+        <div class="w-[80%] flex flex-col h-full py-2">
+          <div class="w-1/3 mb-5">
+            <h2 class="text-3xl font-bold text-white">
+              Engage visitors with dynamic 3D visuals that bring your brand's
+              narrative to life.
+            </h2>
+          </div>
+
+          <div class="w-[80%] grid grid-cols-3 gap-0.5 mt-7">
+            <section
+              class="bg-white/10 relative flex flex-col p-3 [clip-path:polygon(0_0,calc(100%_-_5rem)_0,100%_5rem,100%_100%,0_100%)] overflow-hidden"
+            >
+              <div
+                class="absolute inset-x-0 top-0 border-t-2 border-white/10"
+              ></div>
+
+              <div
+                class="absolute inset-y-0 right-0 border-r-2 border-white/10"
+              ></div>
+
+              <div
+                class="absolute top-0 right-0 w-4 h-4 [background:linear-gradient(to_bottom_right,white_4px,transparent_2px)]"
+              ></div>
+
+              <h2 class="text-3xl text-white font-bold mb-4">About</h2>
+              <p class="text-sm text-white opacity-80">
+                Engage visitors with dynamic 3D visuals that bring your brand's
+                narrative to life.
+              </p>
+            </section>
+
+            <section
+              class="bg-white/10 relative flex flex-col p-3 [clip-path:polygon(0_0,calc(100%_-_5rem)_0,100%_5rem,100%_100%,0_100%)] overflow-hidden"
+            >
+              <div
+                class="absolute inset-x-0 top-0 border-t-2 border-white/10"
+              ></div>
+
+              <div
+                class="absolute inset-y-0 right-0 border-r-2 border-white/10"
+              ></div>
+
+              <div
+                class="absolute top-0 right-0 w-4 h-4 [background:linear-gradient(to_bottom_right,white_4px,transparent_2px)]"
+              ></div>
+              <h3 class="text-xl text-white font-medium">
+                Optimize Performance
+              </h3>
+              <p class="text-sm text-white mt-auto">
+                High-fidelity graphics with smooth frame rates on desktop and
+                mobile alike.
+              </p>
+            </section>
+
+            <section
+              class="bg-white/10 relative flex flex-col p-3 [clip-path:polygon(0_0,calc(100%_-_5rem)_0,100%_5rem,100%_100%,0_100%)] overflow-hidden"
+            >
+              <div
+                class="absolute inset-x-0 top-0 border-t-2 border-white/10"
+              ></div>
+
+              <div
+                class="absolute inset-y-0 right-0 border-r-2 border-white/10"
+              ></div>
+
+              <div
+                class="absolute top-0 right-0 w-4 h-4 [background:linear-gradient(to_bottom_right,white_8px,transparent_2px)]"
+              ></div>
+              <h3 class="text-xl text-white font-medium">
+                Seamless Integration
+              </h3>
+              <p class="text-sm text-white mt-auto">
+                Embed interactive models into any site architecture—no heavy
+                plugins required.
+              </p>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing" class="h-screen w-full flex items-center">
+      <div class="w-full h-full flex px-2">
+        <div class="w-[10%] flex items-center justify-center">
+          <div class="transform -rotate-90 text-white text-xl font-bold"></div>
+        </div>
+
+        <div class="w-[80%] flex flex-col h-full justify-between py-10">
+          <div>
+            <h2 class="text-3xl font-bold text-white mb-5">Pricing Plans</h2>
+          </div>
+
+          <div
+            class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-10"
+          >
+            <div
+              class="pb-1 border-2 border-white/50 rounded flex flex-col justify-between items-center bg-white/10"
+            >
+              <div>
+                <h3 class="mt-2 text-xl text-center font-semibold text-white">
+                  Basic
+                  <div class="text-4xl my-1">$499</div>
+                </h3>
+
+                <ul class="m-1 space-y-1">
+                  <li class="flex items-center text-white">
+                    <span class="mr-2 text-white">✓</span>Single 3D model
+                    integration
+                  </li>
+                  <li class="flex items-center text-white">
+                    <span class="mr-2 text-white">✓</span>Basic interactivity
+                  </li>
+                  <li class="flex items-center text-white">
+                    <span class="mr-2 text-white">✓</span>Responsive design
+                  </li>
+                </ul>
+              </div>
+              <button
+                class="bg-white text-black py-1 px-1 rounded-lg flex justify-between items-center w-12 [clip-path:polygon(0_0,calc(100%_-_16px)_0,100%_16px,100%_100%,16px_100%,0_calc(100%_-_16px))]"
+              >
+                <span class="font-bold">Select Basic</span>
+                <span> ➔ </span>
+              </button>
+            </div>
+
+            <div
+              class="pb-1 border-2 border-white/50 rounded flex flex-col justify-between items-center bg-white/10"
+            >
+              <div>
+                <h3 class="mt-2 text-xl text-center font-semibold text-white">
+                  Pro
+                  <div class="text-4xl my-1">$999</div>
+                </h3>
+
+                <ul class="m-1 space-y-1">
+                  <li class="flex items-center text-white">
+                    <span class="mr-2 text-white">✓</span>Up to 3 models &
+                    scenes
+                  </li>
+                  <li class="flex items-center text-white">
+                    <span class="mr-2 text-white">✓</span>Advanced shaders &
+                    lighting
+                  </li>
+                  <li class="flex items-center text-white">
+                    <span class="mr-2 text-white">✓</span>Performance tuning
+                  </li>
+                </ul>
+              </div>
+              <button
+                class="bg-white text-black py-1 px-1 rounded-lg flex justify-between items-center w-12 [clip-path:polygon(0_0,calc(100%_-_16px)_0,100%_16px,100%_100%,16px_100%,0_calc(100%_-_16px))]"
+              >
+                <span class="font-bold">Select Pro</span>
+                <span> ➔ </span>
+              </button>
+            </div>
+
+            <div
+              class="pb-1 border-2 border-white/50 rounded flex flex-col justify-between items-center bg-white/10"
+            >
+              <div>
+                <h3 class="mt-2 text-xl text-center font-semibold text-white">
+                  Enterprise
+                  <div class="text-4xl my-1">$1,999</div>
+                </h3>
+
+                <ul class="m-1 space-y-1">
+                  <li class="flex items-center text-white">
+                    <span class="mr-2 text-white">✓</span>Full custom 3D
+                    experience
+                  </li>
+                  <li class="flex items-center text-white">
+                    <span class="mr-2 text-white">✓</span>Multi-page integration
+                  </li>
+                  <li class="flex items-center text-white">
+                    <span class="mr-2 text-white">✓</span>Ongoing support
+                  </li>
+                </ul>
+              </div>
+              <button
+                class="bg-white text-black py-1 px-1 rounded-lg flex justify-between items-center w-12 [clip-path:polygon(0_0,calc(100%_-_16px)_0,100%_16px,100%_100%,16px_100%,0_calc(100%_-_16px))]"
+              >
+                <span class="font-bold">Select Enterprise</span>
+                <span> ➔ </span>
+              </button>
+            </div>
+
+            <div
+              class="pb-1 border-2 border-white/50 rounded flex flex-col justify-between items-center bg-white/10"
+            >
+              <div>
+                <h3 class="mt-2 text-xl text-center font-semibold text-white">
+                  Custom
+                  <div class="text-4xl my-1">—</div>
+                </h3>
+
+                <ul class="m-1 space-y-1">
+                  <li class="flex items-center text-white">
+                    <span class="mr-2 text-white">✓</span>Bespoke 3D solutions
+                  </li>
+                  <li class="flex items-center text-white">
+                    <span class="mr-2 text-white">✓</span>Dedicated design
+                    sprints
+                  </li>
+                  <li class="flex items-center text-white">
+                    <span class="mr-2 text-white">✓</span>Enterprise SLAs
+                  </li>
+                </ul>
+              </div>
+              <button
+                class="bg-white text-black py-1 px-1 rounded-lg flex justify-between items-center w-12 [clip-path:polygon(0_0,calc(100%_-_16px)_0,100%_16px,100%_100%,16px_100%,0_calc(100%_-_16px))]"
+              >
+                <span class="font-bold">Contact Us</span>
+                <span> ➔ </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const modal = document.getElementById("contactModal");
+        const modalContent = document.getElementById("modalContent");
+        const modalBackdrop = document.getElementById("modalBackdrop");
+        const closeBtn = document.getElementById("closeModalBtn");
+
+        const openButtons = document.querySelectorAll(
+          "button:not(#closeModalBtn)"
+        );
+
+        const contactNavLink = document.querySelector('a[href="#contact"]');
+
+        const navLinks = document.querySelectorAll(
+          'nav a:not([href="#contact"])'
+        );
+
+        function openModal(e) {
+          if (e && e.preventDefault) {
+            e.preventDefault();
+          }
+
+          modal.classList.remove("opacity-0");
+          modal.classList.remove("pointer-events-none");
+
+          setTimeout(() => {
+            modalContent.style.marginLeft = "0";
+            modalBackdrop.classList.add("opacity-100");
+          }, 10);
+        }
+
+        function closeModal() {
+          modalContent.style.marginLeft = "-100%";
+          modalBackdrop.classList.remove("opacity-100");
+
+          setTimeout(() => {
+            modal.classList.add("opacity-0");
+            modal.classList.add("pointer-events-none");
+          }, 500);
+        }
+
+        function smoothScroll(e) {
+          e.preventDefault();
+
+          const targetId = this.getAttribute("href");
+          const targetSection = document.querySelector(targetId);
+
+          if (targetSection) {
+            targetSection.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        }
+
+        openButtons.forEach((button) => {
+          button.addEventListener("click", openModal);
+        });
+
+        if (contactNavLink) {
+          contactNavLink.addEventListener("click", openModal);
+        }
+
+        navLinks.forEach((link) => {
+          link.addEventListener("click", smoothScroll);
+        });
+
+        closeBtn.addEventListener("click", closeModal);
+
+        modalBackdrop.addEventListener("click", closeModal);
+      });
+    </script>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
