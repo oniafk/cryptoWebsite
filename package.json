@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "vercel-build": "npm install && tsc && vite build"
   },
   "devDependencies": {
     "typescript": "~5.7.2",
