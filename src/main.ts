@@ -7,7 +7,7 @@ import {
 } from "./getBodies";
 import * as RAPIER from "@dimforge/rapier3d-compat";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { GUI } from "three/addons/libs/lil-gui.module.min.js";
+// import { GUI } from "three/addons/libs/lil-gui.module.min.js";
 import getLayer from "./getLayer";
 import { EXRLoader } from "three/addons/loaders/EXRLoader.js";
 
@@ -238,27 +238,6 @@ function regenerateBodies() {
     bodies.push(body);
     scene.add(body.mesh);
   }
-}
-
-// Add this to update the mouse ball's influence
-function updateMouseInfluence() {
-  // Get the mouseBall's rigid body from the mesh's userData
-  // We need to store a reference first
-  if (!mouseBall.mesh.userData.rigidBody) {
-    // Store the rigid body reference in userData for easier access
-    mouseBall.mesh.userData.rigidBody = mouseBall.rigid;
-  }
-
-  // Remove existing colliders from the rigid body
-  // In Rapier, we need to use removeCollider with the collider handle
-  const rigidBody = mouseBall.mesh.userData.rigidBody;
-
-  // Create new collider with updated size
-  const mouseSize = 0.25;
-  let dynamicCollider = RAPIER.ColliderDesc.ball(
-    mouseSize * config.mouseInfluence
-  );
-  world.createCollider(dynamicCollider, rigidBody);
 }
 
 // Setup the GUI
